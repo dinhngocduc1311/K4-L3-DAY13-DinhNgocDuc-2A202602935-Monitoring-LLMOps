@@ -1,0 +1,9 @@
+Source: runtime request_received events in data/logs.jsonl
+Inputs came from fake test fixtures; only scrubbed output is reproduced here.
+
+{"ts":"2026-09-29T08:23:44.503127Z","event":"request_received","correlation_id":"req-60c87e18","message_preview":"What is your refund policy? My email is [REDACTED_EMAIL]"}
+{"ts":"2026-09-29T08:23:47.801326Z","event":"request_received","correlation_id":"req-d5098fab","message_preview":"Here is my phone [REDACTED_PHONE_VN], what should be logged?"}
+{"ts":"2026-09-29T08:23:49.421379Z","event":"request_received","correlation_id":"req-7c6a7e17","message_preview":"What is the policy for PII and credit card [REDACTED_CREDIT_CARD]?"}
+{"ts":"2026-09-29T08:24:04.089884Z","event":"request_received","correlation_id":"req-cafebabe","message_preview":"Email [REDACTED_EMAIL], phone [REDACTED_PHONE_VN], CCCD [REDACTED_CCCD], card [REDACTED_CREDIT_CARD]"}
+
+Validator result: 0 potential PII leaks across 92 log records.

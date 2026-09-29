@@ -1,6 +1,7 @@
 # K4-L3A — Lab Day 13: Monitoring & LLMOps
 
-> - **Loại repository:** đề bài/starter dành riêng cho lớp K4-L3A
+> - **Loại repository:** bài nộp cá nhân K4-L3A của Đinh Ngọc Đức — MSSV 2A202602935
+> - **Starter chính thức:** [VinUni-AI20k/K4-L3A-Day13-Monitoring-LLMOps](https://github.com/VinUni-AI20k/K4-L3A-Day13-Monitoring-LLMOps)
 > - **Hình thức làm bài:** cá nhân
 > - **Thời gian trên lớp:** 14:00–18:00 (240 phút)
 > - **Deadline mặc định:** 23:59:59 trong ngày học, múi giờ Asia/Ho_Chi_Minh
@@ -151,19 +152,19 @@ git status --short
 git log -1 --oneline
 ```
 
-- [ ] Không có `.env`, secret, `.venv/`, PII thô hoặc evidence của học viên/lớp khác.
-- [ ] `submission/REPORT.md` đã đủ; mọi ảnh dùng đường dẫn tương đối và mở được.
-- [ ] Bạn demo và giải thích được luồng Metrics → Logs → Traces → Root cause.
+- [x] Không có `.env`, secret, `.venv/`, PII thô hoặc evidence của học viên/lớp khác.
+- [x] `submission/REPORT.md` đã đủ phần kỹ thuật; mọi evidence dùng đường dẫn tương đối và mở được.
+- [x] Báo cáo giải thích được luồng Metrics → Logs → Traces → Root cause.
 
 ## Tên repo bài nộp
 
-Repo này là **repo đề bài**, nên tên chính thức là `K4-L3A-Day13-Monitoring-LLMOps` (mẫu `K4-L3A-TenBai`). Repo bài nộp cá nhân dùng mẫu:
+Repo này là **repo bài nộp cá nhân**, được tạo từ starter K4-L3A và dùng đúng tên:
 
 ```text
-K4-L3-DAY13-HoVaTen-MSSV-Monitoring-LLMOps
+K4-L3-DAY13-DinhNgocDuc-2A202602935-Monitoring-LLMOps
 ```
 
-Ví dụ: `K4-L3-DAY13-NguyenVanAn-123456-Monitoring-LLMOps`. Mỗi học viên nộp URL repo cá nhân và commit SHA cuối trên VLearn LMS/Codelabs. Xem đầy đủ tại [docs/SUBMISSION.md](docs/SUBMISSION.md).
+Origin trỏ tới repository cá nhân `dinhngocduc1311/K4-L3-DAY13-DinhNgocDuc-2A202602935-Monitoring-LLMOps`, không trỏ tới starter. URL repo và commit SHA cuối được nộp trên VLearn LMS/Codelabs. Xem đầy đủ tại [docs/SUBMISSION.md](docs/SUBMISSION.md).
 
 Không push bài làm trực tiếp lên repo đề bài và không dùng chung repo bài nộp với học viên khác.
 

@@ -1,0 +1,6 @@
+Source: data/logs.jsonl
+Selected runtime event (single JSON line):
+
+{"service":"api","latency_ms":2661,"ttft_ms":52,"tokens_in":36,"tokens_out":144,"cost_usd":0.002268,"quality_score":0.9,"tool_name":"retrieval","tool_success":true,"payload":{"answer_preview":"Starter answer. You should improve this output logic and add better quality chec..."},"event":"response_sent","user_id_hash":"2055254ee30a","env":"dev","model":"claude-sonnet-4-5","session_id":"s01","feature":"qa","correlation_id":"req-ef986a2f","level":"info","ts":"2026-09-29T08:59:00.754512Z"}
+
+Required fields visible: ts, event, correlation_id, model, env, feature and latency_ms.

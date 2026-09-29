@@ -32,7 +32,7 @@ Commit SHA phải tồn tại trên remote và chứa đầy đủ source, confi
 ```text
 K4-L3-DAY13-HoVaTen-MSSV-Monitoring-LLMOps/
 ├── app/                         # source đã hoàn thiện
-├── config/                      # dashboard, SLO, alert và challenge gốc
+├── config/                      # dashboard, SLO, alert; challenge chỉ tồn tại local và bị ignore
 ├── data/                        # input mẫu; không commit log chứa PII
 ├── docs/
 │   └── alerts.md                # runbook cho ba alert

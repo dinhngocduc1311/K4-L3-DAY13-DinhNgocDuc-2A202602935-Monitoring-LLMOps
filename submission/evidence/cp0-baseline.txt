@@ -1,0 +1,52 @@
+CP0 BASELINE — 2026-09-29 (Asia/Ho_Chi_Minh)
+Commit: 13b606680ae4a3072eda90334959b632fe4ecba0
+Python: 3.12.9
+
+Health
+  ok: true
+  tracing_enabled: true
+  incidents: rag_slow=false, tool_fail=false, cost_spike=false
+
+Workload
+  python scripts/load_test.py
+  10/10 requests returned HTTP 200
+  data/logs.jsonl created
+
+Tests and validators
+  python -m pytest -q: 22 passed in 3.29s
+  python scripts/validate_dashboard.py: HỢP LỆ, 6/6 panels
+  python scripts/validate_logs.py: 30/100
+    records: 22
+    missing required: 20
+    missing enrichment: 20
+    unique correlation IDs: 0
+    potential PII leaks: 0
+  Note: correlation ID and enrichment are intentional CP1 TODOs.
+
+Metrics after 10 requests
+  latency P50/P95/P99: 405/1275/1275 ms
+  TTFT P95: 53 ms
+  total cost: 0.0203 USD
+  total input/output tokens: 338/1289
+  average quality: 0.88
+  retrieval success: 10/10
+
+Langfuse
+  auth: success
+  project: day13-k4-l3a-2A202602935
+  recent root observations: 10
+  trace IDs:
+    0c5564ffd1d6b40269cb443242e57b9b
+    1f7ad0a6fc0ee1c6858b1b3fe88ff3ea
+    2a614b51543785aca720ac42a661fb50
+    5c94341aea686d421922947bc69c31a8
+    83f86a5f8a84bcc01bbf6058cd97fd5c
+    8a26e46a0294f1807777e63da3fe8b6e
+    c60f644494ec88ba337cb457b4a39f5d
+    cd2cc845a094475e8121372ca86d0cb2
+    d11c505d3115cc77cb93e87cd5d22ac6
+    d3a76de6635541e856878421858b4293
+
+Known baseline condition
+  Langfuse prompt day13-chat with label production does not exist yet, so the app used
+  local-fallback. Prompt creation/versioning belongs to CP2 and was not pre-completed here.

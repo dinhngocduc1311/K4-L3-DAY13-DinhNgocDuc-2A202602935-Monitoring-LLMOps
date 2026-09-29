@@ -1,0 +1,9 @@
+CP3 OFFICIAL CHALLENGE EVIDENCE
+Challenge ID: day13-k4-l3a-monitoring-llmops-v1
+UTC interval: 2026-09-29T09:16:14Z to 2026-09-29T09:16:31Z
+
+Selected structured log line from data/logs.jsonl:
+{"ts":"2026-09-29T09:16:25.150959Z","event":"response_sent","correlation_id":"req-8a381719","session_id":"k4-l3a-challenge-s02","feature":"monitoring","model":"claude-sonnet-4-5","env":"dev","latency_ms":2658,"ttft_ms":50,"tool_name":"retrieval","tool_success":true}
+
+The request returned successfully but was slow. Its correlation ID resolves to
+Langfuse trace 3d35878374249f9b539c13c941190f9e in the personal project.

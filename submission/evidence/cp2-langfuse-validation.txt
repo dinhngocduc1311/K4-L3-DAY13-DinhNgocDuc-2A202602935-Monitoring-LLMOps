@@ -1,0 +1,44 @@
+CP2 Langfuse trace and prompt validation
+Date: 2026-09-29 (Asia/Ho_Chi_Minh)
+Project: day13-k4-l3a-2A202602935
+Project ID: cmumcevw903tiad0dkemessl3
+
+TRACE TREE
+Representative trace: 7e27b81818c5fa1ed6af951882f15cd7
+Correlation ID: req-048dbdf0
+Root: lab-agent-run (AGENT), observation 36abec6a7017aabc, 157 ms
+|- retrieval (RETRIEVER), observation d9745a72ee16d8dc, parent 36abec6a7017aabc, 1 ms
+`- fake-llm-generation (GENERATION), observation 8cf245b06d7e0750, parent 36abec6a7017aabc, 154 ms
+Generation model: claude-sonnet-4-5
+Generation usage: input 36, output 129, total 165 tokens
+Generation cost: $0.002043
+Prompt: day13-chat, label production, version 1
+The root carries hashed user_id, session_id, feature, model, env and correlation_id.
+Captured input/output is structural or redacted preview only; no raw PII is stored.
+
+FINAL WORKLOAD AFTER ROLLBACK
+10/10 HTTP 200 requests produced root traces with both child observations:
+- 7e27b81818c5fa1ed6af951882f15cd7 / req-048dbdf0
+- 15dd8677781cabf68430bd98cb584b57 / req-406b5f10
+- 453b81f70b14c2c78816c89f2e0238f5 / req-d7506cc3
+- 751c22b00ecc70bc67c47dc6cf403127 / req-ce7f5466
+- 927b590aaa86cf83ac02e3e1dc147455 / req-c3fb8db3
+- 23fac8799448b569028e356e3ddfbb3b / req-b9f59af6
+- b2a141f4ba21ce9736edef8fda813f1b / req-3859056c
+- ccc29728e85461ddff6986f5dfa0d868 / req-8badc041
+- 9011ecd5ad4c33b75cf672c03d344d93 / req-15494993
+- 9dd9b991e7a8cedcde8ce9d62c4e854c / req-51bd6bf4
+
+PROMPT VERSIONING
+v1 text: Feature={{feature}} / Docs={{docs}} / Question={{message}}
+v1 current labels after rollback: baseline, production
+v2 change: adds an instruction to answer concisely in at most three sentences.
+v2 current labels after rollback: candidate, latest
+
+Same test input: Explain how metrics logs and traces work together
+- v1 baseline trace: b765d7a8fc33e12201536bbd8c0905af / req-b1000001
+- v2 candidate trace: ed707ed50059918012997f80e86fe839 / req-c2000003
+- v2 production trace after promotion: 91525b42459d64bb036d765a8e1fea80 / req-p2000002
+
+Promotion check: production resolved to version 2.
+Rollback check: production now resolves to version 1; candidate still resolves to version 2.

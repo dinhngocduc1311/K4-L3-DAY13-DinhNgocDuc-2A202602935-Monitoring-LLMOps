@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="refresh" content="30">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K4-L3A Day 13 Monitoring &amp; LLMOps</title>
+<style>
+body { margin:0; padding:28px; font:16px system-ui; color:#e8eef8; background:#0b1220; }
+header { display:flex; justify-content:space-between; align-items:end; margin-bottom:20px; }
+h1 { margin:0 0 6px; font-size:28px; } .meta { color:#91a4bf; font-size:13px; }
+main { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.panel { min-height:140px; padding:20px; border:1px solid #27364d; border-radius:14px; background:#121d2f; }
+.panel.ok { border-left:5px solid #33d17a; } .panel.bad { border-left:5px solid #ff6b6b; }
+h2 { margin:0 0 22px; font-size:18px; } .details { font-size:17px; line-height:1.8; }
+.threshold { margin-top:20px; padding-top:12px; border-top:1px solid #27364d; color:#9fb3cc; font-size:13px; }
+@media(max-width:800px) { main { grid-template-columns:1fr; } }
+</style></head><body>
+<header><div><h1>K4-L3A Day 13 Monitoring &amp; LLMOps</h1>
+<div class="meta">Source: data/logs.jsonl · Time range: 2026-09-29T09:16:14+00:00 to 2026-09-29T09:16:31+00:00 · Refresh: 30 seconds</div></div>
+<div class="meta">Generated 2026-09-29T16:18:48+07:00</div></header>
+<main><section class='panel bad'><h2>Latency percentiles and TTFT</h2><div class='details'><b>P50</b> 2657 ms · <b>P95</b> 3961 ms · <b>P99</b> 3961 ms · <b>TTFT P95</b> 50 ms</div><div class='threshold'>SLO/threshold: p95 ≤ 3000 ms</div></section><section class='panel ok'><h2>Request traffic</h2><div class='details'><b>5</b> requests · <b>5.00</b> requests/min</div><div class='threshold'>SLO/threshold: rate_per_minute ≥ 1 requests_per_minute</div></section><section class='panel ok'><h2>Error rate and retrieval success</h2><div class='details'><b>Error rate</b> 0.00% · <b>Retrieval success</b> 100.00% · <b>Breakdown</b> {}</div><div class='threshold'>SLO/threshold: error_rate_pct ≤ 2 percent</div></section><section class='panel ok'><h2>Cost over time</h2><div class='details'><b>Total</b> $0.008445 · <b>Per-minute</b> 09:16=$0.0084</div><div class='threshold'>SLO/threshold: total ≤ 2.5 usd</div></section><section class='panel ok'><h2>Input and output tokens</h2><div class='details'><b>Input</b> 175 · <b>Output</b> 528</div><div class='threshold'>SLO/threshold: sum_by_field ≤ 50000 tokens</div></section><section class='panel ok'><h2>Quality proxy</h2><div class='details'><b>Mean quality score</b> 0.840</div><div class='threshold'>SLO/threshold: mean ≥ 0.75 score_0_to_1</div></section></main></body></html>

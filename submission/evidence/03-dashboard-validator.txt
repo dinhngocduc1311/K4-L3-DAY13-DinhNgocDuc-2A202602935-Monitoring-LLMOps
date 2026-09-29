@@ -1,0 +1,23 @@
+CP2 dashboard, SLO and alert validation
+Date: 2026-09-29 (Asia/Ho_Chi_Minh)
+
+Command: python scripts/validate_dashboard.py
+Result: HỢP LỆ: 6/6 panel có trong dashboard contract.
+
+Runtime snapshot: evidence/11-dashboard-overview.png
+Source: data/logs.jsonl, time range: 60 minutes
+Requests/responses: 25/25
+Latency: P50 386 ms, P95 1264 ms, P99 1289 ms
+TTFT P95: 54 ms
+Error rate: 0.00%
+Retrieval success: 100.00%
+Cost total: $0.054384
+Tokens: 883 input, 3449 output
+Quality proxy mean: 0.864
+
+Primary SLO: 99.5% successful responses within 3000 ms over 28 days.
+Observed good events: 25/25 (100%); observed error-budget consumption: 0%.
+Budget formula: total_requests * (1 - 0.995), equivalent to 5 bad events per 1000 requests.
+
+Alerts configured: 3/3 symptom-based rules.
+Each rule has condition, duration, severity, owner, Slack channel and runbook.

@@ -1,0 +1,14 @@
+CP3 OFFICIAL CHALLENGE EVIDENCE
+Challenge ID: day13-k4-l3a-monitoring-llmops-v1
+Project: day13-k4-l3a-2A202602935
+Correlation ID: req-8a381719
+Trace ID: 3d35878374249f9b539c13c941190f9e
+
+lab-agent-run (AGENT)        2.659 s  status=DEFAULT  id=e10287f3bb24d2c6
+|- retrieval (RETRIEVER)     2.502 s  status=DEFAULT  id=39d248c5902ee982
+`- fake-llm-generation       0.154 s  status=DEFAULT  id=dd887acd8f7190f1
+   TTFT=0.049 s; model=claude-sonnet-4-5; prompt=day13-chat v1
+   usage=34 input + 113 output = 147 tokens; cost=$0.001797
+
+Retrieval accounts for 94.1% of root duration; generation accounts for 5.8%.
+The successful but slow retrieval child localizes the bottleneck to retrieval.

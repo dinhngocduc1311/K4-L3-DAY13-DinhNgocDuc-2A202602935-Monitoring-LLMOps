@@ -1,0 +1,30 @@
+BONUS AUDIT LOG RUNTIME EVIDENCE
+Date: 2026-09-29 (Asia/Ho_Chi_Minh)
+Source: separate JSONL audit stream configured as data/audit.jsonl
+
+Schema version 1
+  ts, event, correlation_id, actor_id_hash, action, resource, outcome, details
+  actor_id is SHA-256 hashed; nested string details are PII-scrubbed.
+
+Retention demonstration with three fake events and retention_records=2
+  retained_records=2
+  retained_ids=req-audit002,req-audit003
+  raw_email_present=False
+  raw_phone_present=False
+
+Query demonstration
+  Command: python scripts/query_audit.py --outcome failure
+  Matched 1 audit event
+  action=chat
+  actor_id_hash=fda9dacfb7f8
+  correlation_id=req-audit002
+  contact=[REDACTED_PHONE_VN]
+  event=chat_failed
+  outcome=failure
+  resource=qa
+  schema_version=1
+  ts=2026-09-29T12:44:47.182938Z
+
+Focused verification
+  python -m pytest -q tests/test_audit.py tests/test_chat_observability.py
+  3 passed in 2.38s

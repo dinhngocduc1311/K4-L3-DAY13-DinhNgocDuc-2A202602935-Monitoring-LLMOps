@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from structlog.contextvars import bind_contextvars
 
 from .agent import LabAgent
+from .audit import write_audit_event
 from .incidents import disable, enable, status
 from .logging_config import configure_logging, get_logger
 from .metrics import record_error, snapshot
@@ -82,6 +83,15 @@ async def chat(request: Request, body: ChatRequest) -> ChatResponse:
             tool_success=True,
             payload={"answer_preview": summarize_text(result.answer)},
         )
+        write_audit_event(
+            event='chat_completed',
+            correlation_id=request.state.correlation_id,
+            actor_id=body.user_id,
+            action='chat',
+            resource=body.feature,
+            outcome='success',
+            details={'model': agent.model},
+        )
         return ChatResponse(
             answer=result.answer,
             correlation_id=request.state.correlation_id,
@@ -102,6 +112,15 @@ async def chat(request: Request, body: ChatRequest) -> ChatResponse:
             tool_name="retrieval" if isinstance(exc, RuntimeError) else None,
             tool_success=False if isinstance(exc, RuntimeError) else None,
             payload={"detail": str(exc), "message_preview": summarize_text(body.message)},
+        )
+        write_audit_event(
+            event='chat_failed',
+            correlation_id=request.state.correlation_id,
+            actor_id=body.user_id,
+            action='chat',
+            resource=body.feature,
+            outcome='failure',
+            details={'error_type': error_type},
         )
         raise HTTPException(status_code=500, detail=error_type) from exc
 

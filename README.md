@@ -142,6 +142,13 @@ python scripts/load_test.py --challenge --concurrency 5
 
 Không tự tạo, sửa, chia sẻ hoặc lấy `config/challenge.json` từ lớp khác. Nếu chưa nhận file riêng, tiếp tục practice bằng tham số `--scenario`; không chạy challenge chính thức.
 
+## Bonus automation và audit log
+
+- Render dashboard tự động: `python scripts/render_dashboard.py`.
+- Audit JSONL riêng ghi actor đã hash và details đã scrub; retention mặc định 1000 record gần nhất.
+- Truy vấn: `python scripts/query_audit.py --outcome failure` hoặc `--correlation-id req-xxxxxxxx`.
+- Runtime `data/audit.jsonl` được ignore; schema, retention và query evidence nằm tại `submission/evidence/15-audit-log.txt`.
+
 ## Kiểm tra trước khi nộp
 
 ```bash

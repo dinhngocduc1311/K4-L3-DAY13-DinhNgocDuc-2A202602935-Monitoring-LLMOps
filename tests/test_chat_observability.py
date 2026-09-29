@@ -7,13 +7,14 @@ from pathlib import Path
 
 import httpx
 
-from app import logging_config
+from app import audit, logging_config
 from app.main import app
 
 
 def test_chat_response_log_exposes_quality_for_dashboard(
     monkeypatch, tmp_path: Path
 ) -> None:
+    monkeypatch.setattr(audit, 'AUDIT_LOG_PATH', tmp_path / 'audit.jsonl')
     log_path = tmp_path / "logs.jsonl"
     monkeypatch.setattr(logging_config, "LOG_PATH", log_path)
 
@@ -48,9 +49,14 @@ def test_chat_response_log_exposes_quality_for_dashboard(
     assert response_event["ttft_ms"] == response.json()["ttft_ms"]
     assert response_event["tool_name"] == "retrieval"
     assert response_event["tool_success"] is True
+    audit_event = json.loads(audit.AUDIT_LOG_PATH.read_text(encoding='utf-8'))
+    assert audit_event['event'] == 'chat_completed'
+    assert audit_event['correlation_id'] == correlation_id
+    assert audit_event['outcome'] == 'success'
 
 
 def test_supplied_request_id_is_propagated(monkeypatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(audit, 'AUDIT_LOG_PATH', tmp_path / 'audit.jsonl')
     monkeypatch.setattr(logging_config, "LOG_PATH", tmp_path / "logs.jsonl")
 
     async def send_request() -> httpx.Response:

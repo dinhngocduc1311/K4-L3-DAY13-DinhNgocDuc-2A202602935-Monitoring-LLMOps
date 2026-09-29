@@ -34,6 +34,7 @@
 | Incident metric | [`evidence/12-incident-metric.png`](evidence/12-incident-metric.png) |
 | Incident log | [`evidence/13-incident-log.txt`](evidence/13-incident-log.txt) |
 | Incident trace | [`evidence/14-incident-trace.png`](evidence/14-incident-trace.png) và [`evidence/14-incident-trace.txt`](evidence/14-incident-trace.txt) |
+| Bonus audit log | [`evidence/15-audit-log.txt`](evidence/15-audit-log.txt) |
 
 ## 3. Kết quả kỹ thuật
 
@@ -41,7 +42,7 @@
 |---|---|---|---|
 | `validate_logs.py` | 30/100 | 100/100 | 92 records, 44 correlation IDs, không thiếu schema/enrichment. |
 | `validate_dashboard.py` | 6/6 panel | 6/6 panel | Contract YAML và dashboard runtime đều đủ sáu panel. |
-| `pytest` | 22 passed | 27 passed | Chạy bằng Python 3.12.9 trong `.venv`. |
+| `pytest` | 22 passed | 28 passed | Chạy bằng Python 3.12.9 trong `.venv`. |
 | Số traces hợp lệ | 10 root observations | 10/10 root có 2 child observations | Tự tạo trong project Langfuse cá nhân. |
 | Số PII leak | 0 | 0 | Kiểm tra email, điện thoại Việt Nam, CCCD và thẻ. |
 | Latency P95 / TTFT P95 | 1275 ms / 53 ms | 1264 ms / 54 ms | Snapshot CP2 trên 25 request trong 60 phút. |
@@ -61,7 +62,7 @@
 - **Cách tạo/nhận và truyền correlation ID:** Middleware xóa context cũ ở đầu mỗi request, dùng `x-request-id` nếu có hoặc sinh `req-<8-hex>`, bind vào structlog, lưu trong `request.state`, rồi trả lại ở body và header `x-request-id` cùng `x-response-time-ms`.
 - **Các metadata được ghi vào structured log:** `correlation_id`, `user_id_hash`, `session_id`, `feature`, `model`, `env`; response bổ sung latency, TTFT, token, cost, quality và trạng thái retrieval.
 - **Cách bảo đảm PII được scrub trước khi ghi:** Processor `scrub_event` duyệt đệ quy chuỗi trong toàn bộ event sau bước format exception và trước `JsonlFileProcessor`/`JSONRenderer`; user ID chỉ được ghi dưới dạng SHA-256 rút gọn.
-- **Cách kiểm chứng kết quả:** `python scripts/validate_logs.py` đạt 100/100 trên 92 records và 44 correlation IDs; `python -m pytest -q` đạt 27 passed; request `req-cafebabe` xác nhận header/body/log khớp và không còn PII nguyên văn. Xem [`evidence/02-log-validator.txt`](evidence/02-log-validator.txt), [`evidence/04-structured-log.txt`](evidence/04-structured-log.txt) và [`evidence/05-pii-redaction.txt`](evidence/05-pii-redaction.txt).
+- **Cách kiểm chứng kết quả:** `python scripts/validate_logs.py` đạt 100/100 trên 92 records và 44 correlation IDs; `python -m pytest -q` đạt 28 passed; request `req-cafebabe` xác nhận header/body/log khớp và không còn PII nguyên văn. Xem [`evidence/02-log-validator.txt`](evidence/02-log-validator.txt), [`evidence/04-structured-log.txt`](evidence/04-structured-log.txt) và [`evidence/05-pii-redaction.txt`](evidence/05-pii-redaction.txt).
 - **Source và tests:** [`app/middleware.py`](../app/middleware.py), [`app/logging_config.py`](../app/logging_config.py), [`app/pii.py`](../app/pii.py), [`tests/test_chat_observability.py`](../tests/test_chat_observability.py) và [`tests/test_pii.py`](../tests/test_pii.py).
 
 ## 5. Tracing và prompt versioning
@@ -84,6 +85,8 @@
 - **Ba alert và runbook tương ứng:** `high_user_latency` (critical, 5m), `elevated_errors_or_retrieval_failures` (critical, 5m) và `quality_regression` (warning, 15m); cả ba có owner, Slack `#day13-llmops-alerts` và runbook Metrics → Logs → Traces. Xem [`config/slo.yaml`](../config/slo.yaml), [`config/alert_rules.yaml`](../config/alert_rules.yaml), [`docs/alerts.md`](../docs/alerts.md) và [`evidence/03-dashboard-validator.txt`](evidence/03-dashboard-validator.txt).
 - **Dashboard implementation:** [`config/dashboard.yaml`](../config/dashboard.yaml), [`scripts/render_dashboard.py`](../scripts/render_dashboard.py) và [`tests/test_render_dashboard.py`](../tests/test_render_dashboard.py).
 - **Automation đề nghị bonus:** `scripts/render_dashboard.py` đọc JSONL, áp dụng time range và tự render sáu panel/threshold thành HTML; test tự động kiểm tra đủ sáu panel và khả năng cô lập cửa sổ incident. Lệnh tái hiện: `python scripts/render_dashboard.py`; với incident dùng thêm `--from-time` và `--to-time`.
+- **Audit log đề nghị bonus:** Mỗi request ghi một record riêng vào `data/audit.jsonl` với schema version, timestamp, correlation ID, actor đã hash, action/resource/outcome và details đã scrub. Retention mặc định giữ 1000 record gần nhất qua `AUDIT_RETENTION_RECORDS`; truy vấn bằng `python scripts/query_audit.py --outcome failure` hoặc `--correlation-id <id>`. Source/test/evidence: [`app/audit.py`](../app/audit.py), [`scripts/query_audit.py`](../scripts/query_audit.py), [`tests/test_audit.py`](../tests/test_audit.py), [`evidence/15-audit-log.txt`](evidence/15-audit-log.txt).
+- **Phạm vi bonus:** Đề nghị +5 automation và +5 audit log, chạm trần 10 điểm; không claim cost optimization vì chưa có before/after cùng workload và tổng bonus không vượt 10.
 
 ![Dashboard runtime gồm 6 panel](evidence/11-dashboard-overview.png)
 

@@ -19,9 +19,12 @@ Tên file gợi ý:
 12-incident-metric.png
 13-incident-log.png
 14-incident-trace.png
+15-audit-log.txt
 ```
 
 Có thể dùng `.txt` cho output của tests/validators. Có thể tách dashboard thành nhiều ảnh nếu một ảnh không đọc rõ.
+
+`15-audit-log.txt` là evidence bonus cho schema, PII scrubbing, retention và truy vấn audit log riêng.
 
 Ảnh `04`, `05`, `13` lấy từ terminal hoặc `data/logs.jsonl`. Ảnh `06`–`10`, `14` lấy từ project Langfuse cá nhân `day13-k4-l3a-<MSSV>` và nên nhìn thấy tên project. Không mở/chụp trang API Keys.
 

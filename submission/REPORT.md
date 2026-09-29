@@ -8,7 +8,7 @@
 - **MSSV:** 2A202602935
 - **Lớp:** K4-L3A
 - **Repository URL:** https://github.com/dinhngocduc1311/K4-L3-DAY13-DinhNgocDuc-2A202602935-Monitoring-LLMOps
-- **Commit SHA source/evidence đã audit:** `75a87af7f12c484f735a5374199514cb0d503c98`
+- **Commit SHA source/evidence đã audit:** `18d98dd9a3b77d98a00398f482892b86006599b7`
 - **Commit SHA nộp cuối:** dùng `HEAD` của commit cập nhật báo cáo này trên remote; SHA được nộp cùng URL repo trên LMS/Codelabs.
 - **Challenge ID:** `day13-k4-l3a-monitoring-llmops-v1`
 - **Tên project Langfuse cá nhân:** `day13-k4-l3a-2A202602935`
@@ -111,7 +111,7 @@
 - **Cách hiểu luồng Metrics → Logs → Traces:** Metrics phát hiện thời gian/SLI bất thường; trong đúng cửa sổ đó, structured log cung cấp request và `correlation_id`; trace cùng ID tách root thành retrieval/generation để xác định span chiếm thời gian hoặc lỗi. Kết luận root cause chỉ hợp lệ khi ba tầng cùng chỉ về một sự cố.
 - **Vai trò của prompt version, token/cost, SLO hoặc rollback trong vận hành LLM:** Prompt version cho biết thay đổi hành vi đến từ template nào và label `production` cho phép rollback không cần sửa code. Token/cost phát hiện request vẫn HTTP 200 nhưng tiêu tốn bất thường. SLO biến latency thành mục tiêu đo được, còn error budget quyết định khi nào phải dừng rollout để ưu tiên độ tin cậy.
 - **Điều quan trọng nhất đã học:** HTTP 200 không đồng nghĩa hệ thống LLM khỏe; cần đồng thời quan sát latency/TTFT, retrieval, quality, token/cost và giữ correlation ID xuyên suốt.
-- **Hạn chế hoặc phần chưa hoàn thành, nếu có:** Không còn hạng mục kỹ thuật bắt buộc. Commit source/evidence `75a87af7f12c484f735a5374199514cb0d503c98` đã qua toàn bộ gates; commit kế tiếp chỉ cập nhật báo cáo, sau đó push đúng remote cá nhân và nộp URL/SHA trên LMS/Codelabs.
+- **Hạn chế hoặc phần chưa hoàn thành, nếu có:** Không còn hạng mục kỹ thuật bắt buộc. Commit source/evidence và bonus `18d98dd9a3b77d98a00398f482892b86006599b7` đã qua toàn bộ gates; commit kế tiếp chỉ cập nhật báo cáo, sau đó push đúng remote cá nhân và nộp URL/SHA trên LMS/Codelabs.
 
 ## 9. Checklist trước khi nộp
 
